@@ -1,13 +1,15 @@
-# Canon
-A very simple SPA running on AngularJS to display films from the podcast [The Canon](http://thecanon.wolfpop.com). 
+# Keep Talking Helper
+A very simple SPA running on AngularJS to aid in module solving for the game Keep Talking and Nobody Explodes.
 
 ## Demo
-[GitHub Pages](http://alanwright.github.io/Canon/)
+Coming soon.
+
+## Supported Modules
+1. Complicated wires (work in progress)
 
 ## Install to run Locally
 1. Fork the code
 2. Install npm
 3. Install nodejs
 4. From command line run:
-`http-server`
-5. In your browser go to: `http://localhost:8080`
+`http-server -o`
