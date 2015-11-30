@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+</head>
+<body ng-app="app">
+	<h1>Keep Talking and Nobody Explodes Helper</h1>
+	<input type="dropdown"/> New Version? Email me.
+	
+	
+	<div ng-controller="ComplicatedWiresController">
+		<h2>Bomb Information</h2>
+		<h4>You can input this at any time, wires that require this info will also ask for it.</h4>
+		
+		<div class="complicated-wires">
+			<h2>Complicated Wires</h2>
+			<div class="wire-list" ng-repeat="wire in wires">
+				<complicated-wire></complicated-wire>
+			</div>
+			<button type="button" class="btn btn-default btn-lg" ng-click="addWire()">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Wire
+			</button>
+		</div>
+		
+		<div class="final-output">
+			<h2>Final Output</h2>
+			<ul class="output" ng-repeat="wire in wires">
+				<li><complicated-wire-result></complicated-wire-result></li>
+			</ul>
+		</div>
+	</div>
+	
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="js/directives.js"></script>
+  </body>
+</html>

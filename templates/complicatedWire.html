@@ -1,0 +1,15 @@
+<div class="complicated-wire">
+	<label>LED: <input type="checkbox" ng-model="wire.isLedOn">
+	</label>
+	<label>Blue: <input type="checkbox" ng-model="wire.isBlue">
+	</label>
+	<label>Red: <input type="checkbox" ng-model="wire.isRed">
+	</label>
+	<label>White: <input type="checkbox" ng-model="wire.isWhite">
+	</label>
+	<label>Star: <input type="checkbox" ng-model="wire.isStarOn">
+	</label>
+	<label ng-if="wire.needsParallel">Is there a serial port? <input type="checkbox" ng-model="globals.isParallelPort">
+	</label>
+	<complicated-wire-result></complicated-wire-result>
+</div>
