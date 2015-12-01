@@ -5,12 +5,16 @@ var myApp = angular.module('app.controllers', [])
 	$scope.versions = ['1'];
 	$scope.selectedVersion = $scope.versions[0];
 	
-	// Global bomb variables
-	$scope.globals = {
-		hasTwoBatteries: false,
-		hasParallelPort: false,
-		hasEvenSerial: false,
+	$scope.resetBombInfo = function() {
+		// Global bomb variables
+		$scope.globals = {
+			hasTwoBatteries: false,
+			hasParallelPort: false,
+			hasEvenSerial: false,
+		};
 	};
+	
+	$scope.resetBombInfo();
 })
 .controller('ComplicatedWiresController', function($scope) {
 	$scope.wires = [];
