@@ -1,13 +1,18 @@
 'use strict';
 
 var myApp = angular.module('app.controllers', [])
-.controller('ComplicatedWiresController', function($scope) {
+.controller('AppController', function($scope) {
+	$scope.versions = ['1'];
+	$scope.selectedVersion = $scope.versions[0];
+	
+	// Global bomb variables
 	$scope.globals = {
-		version: '1',
-		twoOrMoreBatteries: false,
-		isParallelPort: false,
-		serialNumberEven: false,
+		hasTwoBatteries: false,
+		hasParallelPort: false,
+		hasEvenSerial: false,
 	};
+})
+.controller('ComplicatedWiresController', function($scope) {
 	$scope.wires = [];
 	
 	// Watch globals for bomb updates that will need to update wires
@@ -42,69 +47,141 @@ var myApp = angular.module('app.controllers', [])
 			/*objectEquality*/ true);
     }
 	
+	$scope.clearWires = function() {
+		$scope.wires = [];
+	}
+	
 	/******
 	* Static Functions
 	*******/
 	
-    var resultsMap = {
-        'c': 'Cut',
+	var resultsMap = {
+		'c': 'Cut',
 		'd': 'Do NOT Cut',
-    };
+		's': 'Is the last digit of the serial number even?',
+		'p': 'Is there a parallel port?',
+		'b': 'Is there at least 2 batteries?',
+		'fuck': 'You are fucked',
+	};
 	
 	var updateFinalResult = function(wire) {
-		var binary = mapBooleansToBinary(wire.isWhite, wire.isRed, wire.isBlue, wire.isStarOn, wire.isLedOn);
-		var simpleResult = getSimpleResult(binary);
+		var simpleResult = getSimpleResult(wire);
 		switch (simpleResult) {
 			case 's':
-				wire.result = 'Needs info';
 				wire.needsSerial = true;
-				return;
+				wire.needsParallel = false;
+				wire.needsBatteries = false;
+				break;
 			case 'p':
-				wire.result = 'Needs info';
 				wire.needsParallel = true;
-				return;
+				wire.needsSerial = false;
+				wire.needsBatteries = false;
+				break;
 			case 'b':
-				wire.result = 'Needs info';
+				wire.needsSerial = false;
+				wire.needsParallel = false;
 				wire.needsBatteries = true;
-				return;
+				break;
 			case 'c':
 			case 'd':
-				wire.result = resultsMap[simpleResult];
-				return;
+				wire.needsSerial = false;
+				wire.needsParallel = false;
+				wire.needsBatteries = false;
+				break;
 			default:
 				console.log('Unknown simple type ' + simpleResult);
-				return;
+				break;
 		}
-	};
-	
-	var getSimpleResult = function(binary) {
-		switch (binary) {
-			case 0:
-				return 'c';
-			case 1: 
-				return 's';
-			case 2:
-				return 's';
-			case 4:
-				return 'c';
-			case 8:
-				return 'd';
-			default:
-				return 'c';
-		}
-	};
-	
-	var mapBooleansToBinary = function(isWhite, isRed, isBlue, isStarOn, isLedOn) {
-		var res = 0;
-		if (isRed)
-			res += 1;
-		if (isBlue)
-			res += 2;
-		if (isStarOn)
-			res += 4;
-		if (isLedOn)
-			res += 8;
 		
-		return res;
+		wire.result = resultsMap[simpleResult];
+	};
+	
+	var getSimpleResult = function(wire) {
+		var isRed = wire.isRed,
+			isBlue = wire.isBlue,
+			isStarOn = wire.isStarOn,
+			isLedOn = wire.isLedOn,
+			hasTwoBatteries = $scope.globals.hasTwoBatteries,
+			hasParallelPort = $scope.globals.hasParallelPort,
+			hasEvenSerial = $scope.globals.hasEvenSerial;
+		
+		// cut
+		if((!isRed && !isBlue && !isStarOn && !isLedOn)
+			|| (!isRed && !isBlue && isStarOn && !isLedOn)
+			|| (!isRed && !isBlue && isStarOn && isLedOn)
+			|| (needsTwoBatteries(wire) && hasTwoBatteries)
+			|| (needsParallelPort(wire) && hasParallelPort)
+			|| (needsEvenSerial(wire) && hasEvenSerial))
+			return 'c';
+		
+		// serial number
+		if((!isRed && isBlue && !isStarOn && !isLedOn)
+			|| (isRed && !isBlue && !isStarOn && !isLedOn)
+			|| (isRed && isBlue && !isStarOn && !isLedOn)
+			|| (isRed && isBlue && !isStarOn && isLedOn))
+			return 's';
+		
+		// parallel port
+		if((!isRed && isBlue && !isStarOn && isLedOn)
+			|| (!isRed && isBlue && isStarOn && isLedOn)
+			|| (isRed && isBlue && isStarOn && !isLedOn))
+			return 'p';
+		
+		// batteries
+		if((!isRed && !isBlue && isStarOn && isLedOn)
+			|| (isRed && !isBlue && !isStarOn && isLedOn)
+			|| (isRed && !isBlue && isStarOn && isLedOn))
+			return 'b';
+		
+		// don't cut
+		if((!isRed && !isBlue && !isStarOn && isLedOn)
+			|| (!isRed && isBlue && isStarOn && !isLedOn)
+			|| (isRed && isBlue && isStarOn && isLedOn)
+			|| (needsTwoBatteries(wire) && !hasTwoBatteries)
+			|| (needsParallelPort(wire) && !hasParallelPort)
+			|| (needsEvenSerial(wire) && !hasEvenSerial))
+			return 'd';
+		
+		return 'fuck';
+	};
+	
+	var needsEvenSerial = function(wire) {
+		var isRed = wire.isRed,
+			isBlue = wire.isBlue,
+			isStarOn = wire.isStarOn,
+			isLedOn = wire.isLedOn;
+			
+		if((!isRed && isBlue && !isStarOn && !isLedOn)
+			|| (isRed && !isBlue && !isStarOn && !isLedOn)
+			|| (isRed && isBlue && !isStarOn && !isLedOn)
+			|| (isRed && isBlue && !isStarOn && isLedOn))
+			return true;
+		return false;
+	}
+	
+	var needsTwoBatteries = function(wire) {
+		var isRed = wire.isRed,
+			isBlue = wire.isBlue,
+			isStarOn = wire.isStarOn,
+			isLedOn = wire.isLedOn;
+			
+		if((!isRed && !isBlue && isStarOn && isLedOn)
+			|| (isRed && !isBlue && !isStarOn && isLedOn)
+			|| (isRed && !isBlue && isStarOn && isLedOn))
+			return true;
+		return false;
+	};
+	
+	var needsParallelPort = function(wire) {
+		var isRed = wire.isRed,
+			isBlue = wire.isBlue,
+			isStarOn = wire.isStarOn,
+			isLedOn = wire.isLedOn;
+			
+		if((!isRed && isBlue && !isStarOn && isLedOn)
+			|| (!isRed && isBlue && isStarOn && isLedOn)
+			|| (isRed && isBlue && isStarOn && !isLedOn))
+			return true;
+		return false;
 	};
 });

@@ -1,0 +1,6 @@
+<label ng-if="global || wire.needsParallel">Is there a parallel port? <input type="checkbox" ng-model="globals.hasParallelPort">
+</label>
+<label ng-if="global || wire.needsBatteries">Is there at least two batteries? <input type="checkbox" ng-model="globals.hasTwoBatteries">
+</label>
+<label ng-if="global || wire.needsSerial">Is the last number of the serial number even? <input type="checkbox" ng-model="globals.hasEvenSerial">
+</label>

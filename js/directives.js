@@ -1,6 +1,22 @@
 'use strict';
 
 var myApp = angular.module('app.directives', [])
+.directive('bombInfo', function() {
+    return {
+        restrict: 'E',
+        templateUrl: '../templates/bombInfo.html',
+    };
+})
+.directive('complicatedWires', function() {
+	return {
+		restrict: 'E',
+		scope: {
+			selectedVersion: '=',
+			globals: '=',
+		},
+		templateUrl: '../templates/complicatedWires.html',
+	};
+})
 .directive('complicatedWire', function() {
     return {
         restrict: 'E',
@@ -11,5 +27,16 @@ var myApp = angular.module('app.directives', [])
     return {
         restrict: 'E',
         templateUrl: '../templates/complicatedWireResult.html',
+    };
+})
+.directive('bombInput', function() {
+    return {
+        restrict: 'E',
+		scope: {
+			wire: '=',
+			globals: '=',
+			global: '@',
+		},
+        templateUrl: '../templates/bombInput.html',
     };
 });

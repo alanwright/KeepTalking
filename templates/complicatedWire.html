@@ -9,7 +9,6 @@
 	</label>
 	<label>Star: <input type="checkbox" ng-model="wire.isStarOn">
 	</label>
-	<label ng-if="wire.needsParallel">Is there a serial port? <input type="checkbox" ng-model="globals.isParallelPort">
-	</label>
+	<bomb-input wire="wire" globals="globals"></bomb-input>
 	<complicated-wire-result></complicated-wire-result>
 </div>

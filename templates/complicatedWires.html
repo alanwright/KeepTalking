@@ -1,0 +1,23 @@
+<div class="complicatedWires" ng-controller="ComplicatedWiresController">
+	<div class="complicated-wires">
+		<h2>Complicated Wires</h2>
+		
+		<button type="button" class="btn btn-default btn-lg" ng-click="addWire()">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Wire
+		</button>
+		<button type="button" class="btn btn-default btn-lg" ng-click="clearWires()">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear Wires
+		</button>
+		
+		<div class="wire-list" ng-repeat="wire in wires">
+			<complicated-wire></complicated-wire>
+		</div>
+	</div>
+	
+	<div class="final-output">
+		<h2>Final Output</h2>
+		<ul class="output" ng-repeat="wire in wires">
+			<li><complicated-wire-result></complicated-wire-result></li>
+		</ul>
+	</div>
+</div>
