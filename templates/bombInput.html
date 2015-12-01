@@ -1,6 +1,5 @@
-<label ng-if="global || wire.needsParallel">Is there a parallel port? <input type="checkbox" ng-model="globals.hasParallelPort">
-</label>
-<label ng-if="global || wire.needsBatteries">Is there at least two batteries? <input type="checkbox" ng-model="globals.hasTwoBatteries">
-</label>
-<label ng-if="global || wire.needsSerial">Is the last number of the serial number even? <input type="checkbox" ng-model="globals.hasEvenSerial">
-</label>
+<ul class="bombInfo list-group">
+  <li class="list-group-item" ng-class="{'list-group-item-info': globals.needsParallel}"><label>There is a parallel port <input type="checkbox" ng-model="globals.hasParallelPort"/> (Check if true)</label></li>
+  <li class="list-group-item" ng-class="{'list-group-item-info': globals.needsBatteries}"><label>There is at least two batteries <input type="checkbox" ng-model="globals.hasTwoBatteries"/> (Check if true)</label></li>
+  <li class="list-group-item" ng-class="{'list-group-item-info': globals.needsSerial}"><label>The last number of the serial number is even <input type="checkbox" ng-model="globals.hasEvenSerial"/> (Check if true)</label></li>
+</ul>

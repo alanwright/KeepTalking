@@ -18,6 +18,7 @@ var myApp = angular.module('app.controllers', [])
 })
 .controller('ComplicatedWiresController', function($scope) {
 	$scope.wires = [];
+	$scope.watches = [];
 	
 	// Watch globals for bomb updates that will need to update wires
 	$scope.$watch(
@@ -43,17 +44,28 @@ var myApp = angular.module('app.controllers', [])
 		});
 		
 		// Watch the wire for any updates and re-evaulate the result
-		$scope.$watch(
+		var unbind = $scope.$watch(
 			function() { return $scope.wires[len - 1]; },
 			function(newVal, oldVal) {
 				updateFinalResult(newVal);
 			},
 			/*objectEquality*/ true);
+		
+		$scope.watches.push(unbind);
     }
 	
 	$scope.clearWires = function() {
 		$scope.wires = [];
-	}
+		$scope.watches.forEach(function(unbind) {
+			unbind();
+		});
+		$scope.watches = [];
+	};
+	
+	$scope.getResultClass = function(wire) {
+		var simpleResult = getSimpleResult(wire);
+		return 'alert alert-' + simpleResultClassMap[simpleResult];
+	};
 	
 	/******
 	* Static Functions
@@ -68,23 +80,35 @@ var myApp = angular.module('app.controllers', [])
 		'fuck': 'You are fucked',
 	};
 	
+	var simpleResultClassMap = {
+		'c': 'success',
+		'd': 'danger',
+		's': 'info',
+		'p': 'info',
+		'b': 'info',
+		'fuck': 'warning',
+	};
+	
 	var updateFinalResult = function(wire) {
 		var simpleResult = getSimpleResult(wire);
 		switch (simpleResult) {
 			case 's':
 				wire.needsSerial = true;
+				$scope.globals.needsSerial = true;
 				wire.needsParallel = false;
 				wire.needsBatteries = false;
 				break;
 			case 'p':
 				wire.needsParallel = true;
+				$scope.globals.needsParallel = true;
 				wire.needsSerial = false;
 				wire.needsBatteries = false;
 				break;
 			case 'b':
+				wire.needsBatteries = true;
+				$scope.globals.needsBatteries = true;
 				wire.needsSerial = false;
 				wire.needsParallel = false;
-				wire.needsBatteries = true;
 				break;
 			case 'c':
 			case 'd':

@@ -19,7 +19,7 @@ var myApp = angular.module('app.directives', [])
 })
 .directive('complicatedWire', function() {
     return {
-        restrict: 'E',
+        restrict: 'C',
         templateUrl: '../templates/complicatedWire.html',
     };
 })
@@ -32,11 +32,6 @@ var myApp = angular.module('app.directives', [])
 .directive('bombInput', function() {
     return {
         restrict: 'E',
-		scope: {
-			wire: '=',
-			globals: '=',
-			global: '@',
-		},
         templateUrl: '../templates/bombInput.html',
     };
 });

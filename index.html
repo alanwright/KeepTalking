@@ -8,12 +8,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 </head>
 <body ng-app="app" ng-controller="AppController">
-	<h1>Keep Talking and Nobody Explodes Helper</h1>
-	Version: <select ng-model="selectedVersion" ng-options="v for v in versions"></select> New Version? Open an issue on <a href="https://github.com/alanwright/KeepTalking/issues/new" target="_blank">GitHub</a>.
-	
-	<bomb-info></bomb-info>
-	
-	<complicated-wires selectedVersion="selectedVersion" globals="globals"></complicated-wires>
+	<div class="container">
+		<div class="page-header">
+			<h1>Keep Talking and Nobody Explodes Helper</h1>
+			Version: <select ng-model="selectedVersion" ng-options="v for v in versions"></select> New Version? Open an issue on <a href="https://github.com/alanwright/KeepTalking/issues/new" target="_blank">GitHub</a>.
+		</div>
+		
+		<bomb-info></bomb-info>
+		
+		<complicated-wires selectedVersion="selectedVersion" globals="globals"></complicated-wires>
+	</div>
 	
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

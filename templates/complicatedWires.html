@@ -9,15 +9,31 @@
 			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear Wires
 		</button>
 		
-		<div class="wire-list" ng-repeat="wire in wires">
-			<complicated-wire></complicated-wire>
+		<div class="wire-list container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>LED</th>
+						<th>Blue</th>
+						<th>Red</th>
+						<th>White</th>
+						<th>Star</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="complicatedWire" ng-repeat="wire in wires" ></tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	
 	<div class="final-output">
 		<h2>Final Output</h2>
-		<ul class="output" ng-repeat="wire in wires">
-			<li><complicated-wire-result></complicated-wire-result></li>
-		</ul>
+		<ol class="output">
+			<li ng-repeat="wire in wires">
+				<complicated-wire-result></complicated-wire-result>
+			</li>
+		</ol>
 	</div>
 </div>
