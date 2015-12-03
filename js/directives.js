@@ -4,7 +4,7 @@ var myApp = angular.module('app.directives', [])
 .directive('bombInfo', function() {
     return {
         restrict: 'E',
-        templateUrl: '../templates/bombInfo.html',
+        templateUrl: 'templates/bombInfo.html',
     };
 })
 .directive('complicatedWires', function() {
