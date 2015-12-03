@@ -14,24 +14,24 @@ var myApp = angular.module('app.directives', [])
 			selectedVersion: '=',
 			globals: '=',
 		},
-		templateUrl: '../templates/complicatedWires.html',
+		templateUrl: 'templates/complicatedWires.html',
 	};
 })
 .directive('complicatedWire', function() {
     return {
         restrict: 'C',
-        templateUrl: '../templates/complicatedWire.html',
+        templateUrl: 'templates/complicatedWire.html',
     };
 })
 .directive('complicatedWireResult', function() {
     return {
         restrict: 'E',
-        templateUrl: '../templates/complicatedWireResult.html',
+        templateUrl: 'templates/complicatedWireResult.html',
     };
 })
 .directive('bombInput', function() {
     return {
         restrict: 'E',
-        templateUrl: '../templates/bombInput.html',
+        templateUrl: 'templates/bombInput.html',
     };
 });
