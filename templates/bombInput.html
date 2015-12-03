@@ -1,18 +1,18 @@
 <ul class="bombInfo list-group">
   <li class="list-group-item" ng-class="{'list-group-item-info': globals.needsParallel}">
-    <label>Is there a parallel port?</br>
+    <label>Is there a <strong>parallel</strong> port? (It's the long one!)</br>
       <input type="radio" ng-model="globals.hasParallelPort" ng-value="true"/>Yes
       <input type="radio" ng-model="globals.hasParallelPort" ng-value="false"/>No
     </label>
   </li>
   <li class="list-group-item" ng-class="{'list-group-item-info': globals.needsBatteries}">
-    <label>Is there <em>at least</em> two batteries?</br>
+    <label>Is there <strong>at least two</strong> batteries?</br>
       <input type="radio" ng-model="globals.hasTwoBatteries" ng-value="true"/>Yes
       <input type="radio" ng-model="globals.hasTwoBatteries" ng-value="false"/>No
     </label>
   </li>
   <li class="list-group-item" ng-class="{'list-group-item-info': globals.needsSerial}">
-    <label>Is the last number of the serial number <em>even</em>?</br>
+    <label>Is the last number of the serial number <strong>even</strong>?</br>
       <input type="radio" ng-model="globals.hasEvenSerial" ng-value="true"/>Yes
       <input type="radio" ng-model="globals.hasEvenSerial" ng-value="false"/>No
     </label>
