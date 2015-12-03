@@ -2,10 +2,11 @@
 A very simple SPA running on AngularJS to aid in module solving for the game Keep Talking and Nobody Explodes.
 
 ## Demo
-Coming soon.
+[Github Pages](http://alanwright.github.io/KeepTalking)
 
 ## Supported Modules
-1. Complicated wires (work in progress)
+1. Complicated wires
+2. Passwords (planned)
 
 ## Install to run Locally
 1. Fork the code
