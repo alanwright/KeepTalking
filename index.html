@@ -23,7 +23,10 @@
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
 					<bomb-info ng-if="moduleNum === 0"></bomb-info>
+					
 					<complicated-wires selectedVersion="selectedVersion" globals="globals" ng-if="moduleNum === 0"></complicated-wires>
+					
+					<passwords ng-if="moduleNum === 1"></passwords>
 				</div>
 			</div>
 		</div>
@@ -35,5 +38,6 @@
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/controllers.js"></script>
     <script type="text/javascript" src="js/directives.js"></script>
+    <script type="text/javascript" src="js/filters.js"></script>
 </body>
 </html>

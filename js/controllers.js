@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('app.controllers', [])
+angular.module('app.controllers', [])
 .controller('AppController', function($scope) {
 	$scope.versions = ['1'];
 	$scope.selectedVersion = $scope.versions[0];
@@ -221,4 +221,10 @@ var myApp = angular.module('app.controllers', [])
 	var isFalseAndDefined = function(bool) {
 		return !bool && typeof bool !== 'undefined';	
 	};
+})
+.controller('PasswordsController', function($scope) {
+	// Each rows starting/ending position for the word bank used to distribute them in a table evenly. 
+	// There's definitely a better way to do this, but this will work for now.
+	$scope.rows = [{ start: 0, end: 5 },{ start: 5, end: 10 },{ start: 10, end: 15 },{ start: 15, end: 20 },{start: 20, end: 25 },{start: 25, end: 30},{start: 30, end: 36}];
+	$scope.wordBank = ['about', 'after', 'again', 'below', 'could', 'every', 'first', 'found', 'great', 'house', 'large', 'learn', 'never', 'other', 'place', 'plant', 'point', 'right', 'small', 'sound', 'spell', 'still', 'study', 'their', 'there', 'these', 'thing', 'think', 'three', 'water', 'where', 'which', 'world', 'would', 'write'];
 });

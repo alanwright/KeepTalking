@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('app.directives', [])
+angular.module('app.directives', [])
 .directive('bombInfo', function() {
     return {
         restrict: 'E',
@@ -35,14 +35,24 @@ var myApp = angular.module('app.directives', [])
         templateUrl: 'templates/bombInput.html',
     };
 })
-.directive('passwordsInput', function() {
+.directive('passwords', function() {
     return {
         restrict: 'E',
-        templateUrl:
+        replace: 'true',
+        templateUrl: 'templates/passwords.html',
+    };
+})
+.directive('passwordInput', function() {
+    return {
+        restrict: 'E',
+        replace: 'true',
+        templateUrl: 'templates/passwordInput.html',
     };
 })
 .directive('passwordBank', function() {
     return {
-        
+        restrict: 'E',
+        replace: 'true',
+        templateUrl: 'templates/passwordBank.html',
     };
 });
