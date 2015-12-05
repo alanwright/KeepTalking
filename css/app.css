@@ -6,6 +6,10 @@
 	color: red;
 }
 
+.bombInfo label {
+	font-weight: normal;	
+}
+
  /*
  * Sidebar
  */

@@ -8,9 +8,12 @@ var myApp = angular.module('app.controllers', [])
 	$scope.resetBombInfo = function() {
 		// Global bomb variables
 		$scope.globals = {
-			hasTwoBatteries: false,
-			hasParallelPort: false,
-			hasEvenSerial: false,
+			hasTwoBatteries: undefined,
+			hasParallelPort: undefined,
+			hasEvenSerial: undefined,
+			needsSerial: false,
+			needsParallel: false,
+			needsBatteries: false,
 		};
 		$scope.moduleNum = 0;
 	};
@@ -44,9 +47,6 @@ var myApp = angular.module('app.controllers', [])
 			isBlue: false,
 			isStarOn: false,
 			isLedOn: false,
-			needsSerial: false,
-			needsParallel: false,
-			needsBatteries: false,
 			result: '',
 		});
 		
@@ -67,6 +67,9 @@ var myApp = angular.module('app.controllers', [])
 			unbind();
 		});
 		$scope.watches = [];
+		$scope.globals.needsSerial = false;
+		$scope.globals.needsParallel = false;
+		$scope.globals.needsBatteries = false;
 	};
 	
 	$scope.getResultClass = function(wire) {
@@ -114,14 +117,9 @@ var myApp = angular.module('app.controllers', [])
 			case 'b':
 				wire.needsBatteries = true;
 				$scope.globals.needsBatteries = true;
-				wire.needsSerial = false;
-				wire.needsParallel = false;
 				break;
 			case 'c':
 			case 'd':
-				wire.needsSerial = false;
-				wire.needsParallel = false;
-				wire.needsBatteries = false;
 				break;
 			default:
 				console.log('Unknown simple type ' + simpleResult);
@@ -143,11 +141,20 @@ var myApp = angular.module('app.controllers', [])
 		// cut
 		if((!isRed && !isBlue && !isStarOn && !isLedOn)
 			|| (!isRed && !isBlue && isStarOn && !isLedOn)
-			|| (!isRed && !isBlue && isStarOn && isLedOn)
+			|| (isRed && !isBlue && isStarOn && !isLedOn)
 			|| (needsTwoBatteries(wire) && hasTwoBatteries)
 			|| (needsParallelPort(wire) && hasParallelPort)
 			|| (needsEvenSerial(wire) && hasEvenSerial))
 			return 'c';
+		
+		// don't cut
+		if((!isRed && !isBlue && !isStarOn && isLedOn)
+			|| (!isRed && isBlue && isStarOn && !isLedOn)
+			|| (isRed && isBlue && isStarOn && isLedOn)
+			|| (needsTwoBatteries(wire) && isFalseAndDefined(hasTwoBatteries))
+			|| (needsParallelPort(wire) && isFalseAndDefined(hasParallelPort))
+			|| (needsEvenSerial(wire) && isFalseAndDefined(hasEvenSerial)))
+			return 'd';
 		
 		// serial number
 		if((!isRed && isBlue && !isStarOn && !isLedOn)
@@ -167,15 +174,6 @@ var myApp = angular.module('app.controllers', [])
 			|| (isRed && !isBlue && !isStarOn && isLedOn)
 			|| (isRed && !isBlue && isStarOn && isLedOn))
 			return 'b';
-		
-		// don't cut
-		if((!isRed && !isBlue && !isStarOn && isLedOn)
-			|| (!isRed && isBlue && isStarOn && !isLedOn)
-			|| (isRed && isBlue && isStarOn && isLedOn)
-			|| (needsTwoBatteries(wire) && !hasTwoBatteries)
-			|| (needsParallelPort(wire) && !hasParallelPort)
-			|| (needsEvenSerial(wire) && !hasEvenSerial))
-			return 'd';
 		
 		return 'fuck';
 	};
@@ -218,5 +216,9 @@ var myApp = angular.module('app.controllers', [])
 			|| (isRed && isBlue && isStarOn && !isLedOn))
 			return true;
 		return false;
+	};
+	
+	var isFalseAndDefined = function(bool) {
+		return !bool && typeof bool !== 'undefined';	
 	};
 });
