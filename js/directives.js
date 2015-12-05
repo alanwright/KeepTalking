@@ -34,4 +34,15 @@ var myApp = angular.module('app.directives', [])
         restrict: 'E',
         templateUrl: '../templates/bombInput.html',
     };
+})
+.directive('passwordsInput', function() {
+    return {
+        restrict: 'E',
+        templateUrl:
+    };
+})
+.directive('passwordBank', function() {
+    return {
+        
+    };
 });

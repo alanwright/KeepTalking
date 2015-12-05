@@ -13,10 +13,20 @@
 			<h1>Keep Talking and Nobody Explodes Helper</h1>
 			Version: <select ng-model="selectedVersion" ng-options="v for v in versions"></select> New Version? Open an issue on <a href="https://github.com/alanwright/KeepTalking/issues/new" target="_blank">GitHub</a>.
 		</div>
-		
-		<bomb-info></bomb-info>
-		
-		<complicated-wires selectedVersion="selectedVersion" globals="globals"></complicated-wires>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li ng-class="{'active': moduleNum === 0}"><a href="#" ng-click="setModule(0)">Complicated Wires</a></li>
+						<li ng-class="{'active': moduleNum === 1}"><a href="#" ng-click="setModule(1)">Password</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+					<bomb-info ng-if="moduleNum === 0"></bomb-info>
+					<complicated-wires selectedVersion="selectedVersion" globals="globals" ng-if="moduleNum === 0"></complicated-wires>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<!-- Scripts -->

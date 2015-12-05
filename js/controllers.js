@@ -12,9 +12,16 @@ var myApp = angular.module('app.controllers', [])
 			hasParallelPort: false,
 			hasEvenSerial: false,
 		};
+		$scope.moduleNum = 0;
 	};
 	
 	$scope.resetBombInfo();
+	
+	// 0 - complex wires
+	// 1 - password
+	$scope.setModule = function(moduleNum) {
+		$scope.moduleNum = moduleNum;
+	};
 })
 .controller('ComplicatedWiresController', function($scope) {
 	$scope.wires = [];
