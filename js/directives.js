@@ -38,21 +38,21 @@ angular.module('app.directives', [])
 .directive('passwords', function() {
     return {
         restrict: 'E',
-        replace: 'true',
+        replace: true,
         templateUrl: 'templates/passwords.html',
     };
 })
 .directive('passwordInput', function() {
     return {
         restrict: 'E',
-        replace: 'true',
+        replace: true,
         templateUrl: 'templates/passwordInput.html',
     };
 })
 .directive('passwordBank', function() {
     return {
         restrict: 'E',
-        replace: 'true',
+        replace: true,
         templateUrl: 'templates/passwordBank.html',
     };
 });
