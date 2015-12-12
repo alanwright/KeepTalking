@@ -5,7 +5,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/app.css">
-	<script src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 </head>
 <body ng-app="app" ng-controller="AppController">
 	<div class="container">
@@ -15,19 +15,25 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li ng-class="{'active': moduleNum === 0}"><a href="#" ng-click="setModule(0)">Complicated Wires</a></li>
-						<li ng-class="{'active': moduleNum === 1}"><a href="#" ng-click="setModule(1)">Password</a></li>
-					</ul>
+				<ul class="nav nav-pills nav-justified">
+					<li ng-class="{'active': moduleNum === 0}"><a href="#" ng-click="setModule(0)">Complicated Wires</a></li>
+					<li ng-class="{'active': moduleNum === 1}"><a href="#" ng-click="setModule(1)">Passwords</a></li>
+				</ul>
+			</div>
+			<div class="row main-switch-container" ng-switch on="moduleNum">
+				<div class="error" ng-switch-default>
+					<h2>Shit...Something Went Wrong</h2>
+					<p>
+						Please open an issue on <a href="https://github.com/alanwright/KeepTalking/issues/new" target="_blank">GitHub</a> and include a screenshot or repro steps.
+					</p>
 				</div>
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
-					<bomb-info ng-if="moduleNum === 0"></bomb-info>
-					
-					<complicated-wires selectedVersion="selectedVersion" globals="globals" ng-if="moduleNum === 0"></complicated-wires>
-					
-					<passwords ng-if="moduleNum === 1"></passwords>
-				</div>
+				
+				<!-- bombInfo may be usable for other modules. Keep it outside of the ng-switch -->
+				<!-- TODO: Consider adding a scope function bombInfoNeeded() that does the module check logic -->
+				<bomb-info ng-if="moduleNum === 0"></bomb-info>
+				
+				<complicated-wires ng-switch-when="0" selectedVersion="selectedVersion" globals="globals"></complicated-wires>
+				<passwords ng-switch-when="1"></passwords>
 			</div>
 		</div>
 	</div>
