@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('app', ['app.controllers', 'app.directives']);
+angular.module('app', ['app.controllers', 'app.directives', 'app.filters']);

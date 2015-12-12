@@ -9,3 +9,12 @@
 .bombInfo label {
 	font-weight: normal;	
 }
+
+.passwordInput {
+  padding-bottom: 20px;
+}
+
+/* Angular ngCloak */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
