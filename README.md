@@ -11,6 +11,7 @@ A very simple SPA running on AngularJS to aid in module solving for the game Kee
 ## TODO
 1. Move to TypeScript - The project is getting large enough that it would really benefit from being in TypeScript.
 2. Add UT functionality for all the benefits that come with UTs :) as well as making it easier for others to contribute.
+3. Move reset buttons to a custom directive.
 
 ## Contributing
 ### Adding new module
