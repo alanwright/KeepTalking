@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 </head>
 <body ng-app="app" ng-controller="AppController">
-	<div class="container">
+	<div class="container" ng-cloak>
 		<div class="page-header">
 			<h1>Keep Talking and Nobody Explodes Helper</h1>
 			Version: <select ng-model="selectedVersion" ng-options="v for v in versions"></select> New Version? Open an issue on <a href="https://github.com/alanwright/KeepTalking/issues/new" target="_blank">GitHub</a>.
