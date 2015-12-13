@@ -17,9 +17,11 @@ angular.module('app.filters', [])
         return words;
     
     return _.filter(words, function(word) {
+      word = word.toLowerCase();
+      
       // Loop through each input string
       for (var i = 0, len = inputs.length; i < len; ++i) {
-        var input = inputs[i].chars;
+        var input = inputs[i].chars.toLowerCase();
         if (input.length === 0)
           continue;
         
